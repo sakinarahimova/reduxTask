@@ -1,30 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  seconds: 0,
-  running: false,
+  second: 0,
+  minute: 0,
+  hour: 0,
+  isRunning: false,
 };
 
 const stopwatchSlice = createSlice({
   name: 'stopwatch',
   initialState,
   reducers: {
-    startStopwatch(state) {
-      state.running = true;
+    start(state) {
+      state.isRunning = true;
     },
-    stopStopwatch(state) {
-      state.running = false;
+    stop(state) {
+      state.isRunning = false;
     },
-    resetStopwatch(state) {
-      state.seconds = 0;
-      state.running = false;
+    reset(state) {
+      state.isRunning = false;
+      state.second = 0;
+      state.minute = 0;
+      state.hour = 0;
     },
-    tickStopwatch(state) {
-      if (state.running) state.seconds += 1;
+    tick(state) {
+      state.second += 1;
+      if (state.second === 60) {
+        state.second = 0;
+        state.minute += 1;
+        if (state.minute === 60) {
+          state.minute = 0;
+          state.hour += 1;
+        }
+      }
     },
   },
 });
 
-export const { startStopwatch, stopStopwatch, resetStopwatch, tickStopwatch } =
-  stopwatchSlice.actions;
+export const { start, stop, reset, tick } = stopwatchSlice.actions;
 export default stopwatchSlice.reducer;

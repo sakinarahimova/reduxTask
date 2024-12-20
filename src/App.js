@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import  store  from './redux/store';
+import store from './redux/store';
 import Home from './Components/Home';
 import Clock from './Components/Clock';
 import Timer from './Components/Timer';
